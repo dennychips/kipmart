@@ -8,7 +8,6 @@
 {{HTML::style('assets/css/font.css')}}
 {{HTML::style('assets/css/plugin.css')}}
 {{HTML::style('assets/css/style.css')}}
-{{HTML::style('assets/css/landing.css')}}
 @show
 @section('scripthead')
 <!--[if lt IE 9]>

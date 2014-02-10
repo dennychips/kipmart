@@ -7,11 +7,15 @@ class BaseController extends Controller {
 	 *
 	 * @return void
 	 */
+	
+	// public function __construct(){
+	// 	$user = Auth::user();
+	// }
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))
 		{
-			$this->layout = View::make($this->layout);
+			$this->layout = View::make($this->layout, $data);
 		}
 	}
 

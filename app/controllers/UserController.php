@@ -7,6 +7,7 @@ class UserController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+
 	public function index()
 	{
 		//
@@ -19,7 +20,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('users.register');
 	}
 
 	/**
@@ -29,7 +30,21 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validator = Validator::make(Input::all(), User::$rules);
+
+		if($validator->passes()){
+			$user = new User;
+			$user->username = Input::get('username');
+			$user->email = Input::get('email');
+			$user->firstname = Input::get('firstname');
+			$user->lastname = Input::get('lastname');
+			$user->password = Hash::make(Input::get('password'));
+
+			$user->save();
+			return Redirect::route('user.login')->withInput();
+		} else {
+			   return Redirect::route('user.create')->withErrors($validator)->withInput();
+		}
 	}
 
 	/**
@@ -38,9 +53,23 @@ class UserController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($username)
 	{
-		//
+		
+		$user = User::where('username', '=', $username)->firstOrFail();
+		$rel = UserRelationship::checkFollowing($user->id);
+
+		
+		$data = [
+			'user' => $user,
+			'rel' => $rel,
+			'rel_id' => UserRelationship::followingID($user->id)
+		];
+		return View::make('users.show', $data);
+		// $last_query = end($queries);
+		// dd($queries);
+		// Log::info(print_r($last_query, true));
+		
 	}
 
 	/**
@@ -75,5 +104,28 @@ class UserController extends \BaseController {
 	{
 		//
 	}
+	public function login() {
+		return View::make('users.login');
+	}
+	public function postLogin() {
+		$validator = Validator::make(Input::all(), ['username' => 'required', 'password' => 'required']);
 
+		if($validator->passes()){
+			if(Auth::attempt(['username' => Input::get('username'), 'password' => Input::get('password')] ))
+			{
+				return Redirect::intended('/');
+			} 
+			else 
+			{
+				return Redirect::route('user.signin')
+	        			->with('message', 'Your username/password combination was incorrect')
+	        			->withInput();
+			}
+		}
+		return Redirect::route('user.signin')->withErrors($validator)->withInput();
+	}
+	public function logout() {
+		Auth::logout();
+		return Redirect::route('user.login');
+	}
 }
