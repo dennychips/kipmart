@@ -1,10 +1,16 @@
 <?php 
 
+// use Carbon\Carbon;
+
 class StreamController extends BaseController {
 	public function index(){
+		
 		$data = [
-			'posts' => Post::all(),
+			'streams' => Post::getStream(),
 		];
+		
+		
+
 		return View::make('stream.index', $data);
 	}
 }

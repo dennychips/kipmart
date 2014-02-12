@@ -2,6 +2,7 @@
 
 class UserSeeder extends Seeder {
 	public function run() {
+		DB::table('users')->truncate();
 		User::create([
 			'username' 	=> 'admin',
 			'firstname' => 'Admin',
@@ -22,15 +23,26 @@ class UserSeeder extends Seeder {
 			'description'	=> 'Lorem Ipsum',
 			'admin'	=> false
 		]);
-		User::create([
-			'username' 	=> 'example_1',
-			'firstname' => 'Example',
-			'lastname'	=> 'User1',
-			'email'		=> 'example_1@market.com',
-			'password'	=> Hash::make('password'),
-			'birthdate'	=> '1983-01-06',
-			'description'	=> 'Lorem Ipsum',
-			'admin'	=> false
-		]);
+
+		$faker = Faker\Factory::create('en_US');
+		$faker->addProvider(new Faker\Provider\en_US\Address($faker));
+		$faker->addProvider(new Faker\Provider\DateTime($faker));
+		$faker->addProvider(new Faker\Provider\Base($faker));
+		$faker->addProvider(new Faker\Provider\en_US\Company($faker));
+		$faker->addProvider(new Faker\Provider\Internet($faker));
+		$faker->addProvider(new Faker\Provider\Lorem($faker));
+
+		for($x=0;$x<10;$x++){
+			User::create([
+				'username' 	=> $faker->username,
+				'firstname' => $faker->firstName,
+				'lastname'	=> $faker->lastName,
+				'email'		=> $faker->freeEmail,
+				'password'	=> Hash::make('password'),
+				'birthdate'	=> $faker->date($format = 'Y-m-d'),
+				'description'	=> $faker->paragraph($nbSentences = 3),
+				'admin'	=> false
+			]);
+		}
 	}
 }

@@ -20,7 +20,16 @@ class PostsController extends \BaseController {
 	public function create()
 	{
 		//
-		// return View::make('')
+		// $post = new Post;
+		// $post->message = 'Hello';
+		// $user = User::find(Auth::user()->id);
+		// $user->posts()->save($post);
+
+		// $feed = User::find(1)->feeds();
+		// // $post = $feed->posts();
+		// var_dump($feed->get());
+		// print_r(DB::getQueryLog());
+
 	}
 
 	/**
@@ -31,6 +40,19 @@ class PostsController extends \BaseController {
 	public function store()
 	{
 		//
+		$post = new Post;
+		$post->message = 'Hello';
+		$post->picture = URL('assets/uploads/img.png');
+		$user = User::find(Auth::user()->id);
+		$user->posts()->save($post);
+
+		$feed = new Feed;
+		$feed->post_id = $post->id;
+		$feed->sender_id = Auth::user()->id;
+		$feed->save();
+		// print_r(DB::getQueryLog());
+		
+
 	}
 
 	/**

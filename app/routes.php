@@ -10,16 +10,10 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+Route::get('/', 'StaticController@index');
 
-// Route::get('/', function()
-// {
-// 	return View::make('hello');
-// });
-
-// Route::get('/', 'StaticController@index');
 Route::get('register', ['as' => 'user.create', 'uses' => 'UserController@create']);
-Route::get('login', ['as' => 'user.login', 'uses' => 'UserController@login']);
-Route::post('login', ['as' => 'user.signin', 'uses' => 'UserController@postLogin']);
+Route::post('register', ['as' => 'user.store', 'uses' => 'UserController@store']);
 Route::resource('user', 'UserController', ['only' => ['show']]);
 if(Auth::check()){
 	Route::get('/', "StreamController@index");
@@ -29,10 +23,12 @@ if(Auth::check()){
 
 Route::group(['before' => 'guest'], function() {
 	// Route::resource('user', 'UserController', ['only' => ['show']]);
+	Route::get('login', ['as' => 'user.login', 'uses' => 'UserController@login']);
+	Route::post('login', ['as' => 'user.signin', 'uses' => 'UserController@postLogin']);
 });
 
 Route::group(['before' => 'auth'], function() {
-	Route::resource('user', 'UserController', ['only' => ['store', 'destroy', 'update']]);
+	Route::resource('user', 'UserController', ['only' => ['destroy', 'update']]);
 	Route::resource('post', 'PostsController', ['only' => ['create']]);
 	Route::resource('connection', 'UserRelationshipController', ['only' => ['store', 'destroy']]);
 	Route::get('logout', 'UserController@logout');

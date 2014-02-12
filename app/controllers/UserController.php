@@ -39,8 +39,10 @@ class UserController extends \BaseController {
 			$user->firstname = Input::get('firstname');
 			$user->lastname = Input::get('lastname');
 			$user->password = Hash::make(Input::get('password'));
-
+			$user->admin = false;
 			$user->save();
+			
+			
 			return Redirect::route('user.login')->withInput();
 		} else {
 			   return Redirect::route('user.create')->withErrors($validator)->withInput();
