@@ -1,17 +1,9 @@
 <?php 
 
 class Post extends Eloquent {
+	
 	protected $table = 'posts';
-	public $timestamps = true;
-
-	public function formattedCreatedDate() {        
-		if($this->created_at->diffInDays() > 30) {
-            return 'Created at ' . $this->created_at->toFormattedDateString();
-        } else {
-            return 'Created ' . $this->created_at->diffForHumans();
-        }
-    }
-
+	
 	public function user(){
 		return $this->belongsTo('User', 'sender_id');
 	}

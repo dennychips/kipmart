@@ -2,6 +2,7 @@
 
 @section('content')
 	<section class="comment-list block">
+	
 	@if($streams)
 		@foreach($streams as $stream)
 	    <article id="comment-id-1" class="comment-item media arrow arrow-left">

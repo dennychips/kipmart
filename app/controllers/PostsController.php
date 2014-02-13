@@ -46,10 +46,10 @@ class PostsController extends \BaseController {
 		$user = User::find(Auth::user()->id);
 		$user->posts()->save($post);
 
-		$feed = new Feed;
-		$feed->post_id = $post->id;
-		$feed->sender_id = Auth::user()->id;
-		$feed->save();
+		// $feed = new Feed;
+		// $feed->post_id = $post->id;
+		// $feed->sender_id = Auth::user()->id;
+		// $feed->save();
 		// print_r(DB::getQueryLog());
 		
 
