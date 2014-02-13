@@ -1,4 +1,4 @@
-<div class="col-lg-3">
+<div class="col-lg-3 hidden-sm hidden-xs hidden-md">
 <aside class="panel">
       <div class="text-center clearfix bg-white">
         <img src="{{ URL::asset('assets/img/avatar.jpg')}}">

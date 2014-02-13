@@ -41,8 +41,12 @@ class UserController extends \BaseController {
 			$user->password = Hash::make(Input::get('password'));
 			$user->admin = false;
 			$user->save();
-			
-			
+
+			$rel = new UserRelationship;
+			$rel->user_id = $user->id;
+			$rel->followed_id = $user->id;
+			$rel->save();
+						
 			return Redirect::route('user.login')->withInput();
 		} else {
 			   return Redirect::route('user.create')->withErrors($validator)->withInput();
