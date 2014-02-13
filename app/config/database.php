@@ -65,10 +65,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => 'localhost',
-			'database' => 'kipmarket',
-			'username' => 'denipermana',
-			'password' => 'password',
+			'host'     => 'ec2-23-21-101-129.compute-1.amazonaws.com',
+			'database' => 'detb627rljglsb',
+			'username' => 'xaixoxfmouolpj',
+			'password' => 'bqW5Wicz9baUf4OxVRsEuexlWf',
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
