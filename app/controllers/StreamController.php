@@ -10,7 +10,6 @@ class StreamController extends BaseController {
 		];
 		
 		
-
 		return View::make('stream.index', $data);
 	}
 }

@@ -39,12 +39,20 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
+
+		$validator = Validator::make(Input::all(), [
+				'message' => 'required',
+			]);
 		//
-		$post = new Post;
-		$post->message = 'Hello';
-		$post->picture = URL('assets/uploads/img.png');
-		$user = User::find(Auth::user()->id);
-		$user->posts()->save($post);
+		if($validator->passes()){
+			$post = new Post;
+			$post->message = Input::get('message');
+			$post->picture = URL('assets/uploads/img.png');
+			$user = User::find(Auth::user()->id);
+			$user->posts()->save($post);
+			return Redirect::to('/');
+		}
+
 
 		// $feed = new Feed;
 		// $feed->post_id = $post->id;

@@ -20,6 +20,16 @@
     </ul>
 
     <a class="navbar-brand" href="#">Market</a>
+    <ul class="nav navbar-nav hidden-xs">
+      <li>
+      <div class="m-t-small"><a class="btn btn-sm btn-info" data-toggle="modal" href="#postModal"><i class="icon-plus"></i> POST</a></div>
+      </li>
+    </ul>
+
+    <form class="navbar-form pull-left shift" action="" data-toggle="shift:appendTo" data-target=".nav-primary">
+      <i class="icon-search text-muted"></i>
+      <input type="text" class="input-sm form-control" placeholder="Search">
+    </form>
     
   </header>
   <!-- / header -->

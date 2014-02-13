@@ -13,11 +13,11 @@
         <div class="col-lg-12">
 			<div class="row">
 				@include('_partials.sidebar')
-				<div class="col-lg-6 hidden-sm">
+				<div class="col-lg-9">
 					@yield('content')
 				</div>
 				
-				<div class="col-lg-3">
+				<div class="col-lg-3 hide">
 					<section class="panel">
             <header class="panel-heading bg bg-inverse">
               Mailbox

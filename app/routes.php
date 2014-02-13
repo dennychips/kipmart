@@ -29,7 +29,7 @@ Route::group(['before' => 'guest'], function() {
 
 Route::group(['before' => 'auth'], function() {
 	Route::resource('user', 'UserController', ['only' => ['destroy', 'update']]);
-	Route::resource('post', 'PostsController', ['only' => ['create']]);
+	Route::resource('post', 'PostsController', ['only' => ['create', 'store']]);
 	Route::resource('connection', 'UserRelationshipController', ['only' => ['store', 'destroy']]);
 	Route::get('logout', 'UserController@logout');
 });
