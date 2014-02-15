@@ -10,6 +10,7 @@ class PostSeeder extends Seeder {
 		$faker->addProvider(new Faker\Provider\Lorem($faker));
 
 		for($i=0;$i<100;$i++) {
+			
 			Post::create([
 					'user_id' => $faker->unique($reset = true)->randomNumber(1, 10),
 					'message' => $faker->sentence($nbWords = 10),

@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->text('message');
-			$table->text('picture');
+			// $table->text('attachments');
 			$table->timestamps();
 		});
 	}

@@ -17,6 +17,8 @@ class CreateUserRelationshipsTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id');
 			$table->integer('followed_id');
+			// $table->primary(['id', 'users_id']);
+			// $table->foreign('users_id')->references('id')->on('users');
 			$table->timestamps();
 		});
 	}

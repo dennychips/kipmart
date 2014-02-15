@@ -2,9 +2,10 @@
 
 @section('content')
 	<section class="comment-list block">
-	
+	<?php print_r($streams); ?>
 	@if($streams)
 		@foreach($streams as $stream)
+		
 	    <article id="comment-id-1" class="comment-item media arrow arrow-left">
 	      <a class="pull-left thumb-small avatar"><img src="{{ URL::asset('assets/img/avatar.jpg') }}" class="img-circle"></a>
 	      <section class="media-body panel">

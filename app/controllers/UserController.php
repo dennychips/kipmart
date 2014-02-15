@@ -42,10 +42,10 @@ class UserController extends \BaseController {
 			$user->admin = false;
 			$user->save();
 
-			$rel = new UserRelationship;
-			$rel->user_id = $user->id;
-			$rel->followed_id = $user->id;
-			$rel->save();
+			// $rel = new UserRelationship;
+			// $rel->user_id = $user->id;
+			// $rel->followed_id = $user->id;
+			// $rel->save();
 						
 			return Redirect::route('user.login')->withInput();
 		} else {
@@ -61,21 +61,18 @@ class UserController extends \BaseController {
 	 */
 	public function show($username)
 	{
-		
-		$user = User::where('username', '=', $username)->firstOrFail();
-		$rel = UserRelationship::checkFollowing($user->id);
-
-		
+		$user = User::where('username', '=', $username)->first();
+		$rel = UserRelationship::where('user_id', '=', Auth::user()->id)->where('followed_id', '=', $user->id )->first();
 		$data = [
 			'user' => $user,
 			'rel' => $rel,
-			'rel_id' => UserRelationship::followingID($user->id)
 		];
+		if($rel) {
+			$data['rel_id'] = $rel->id;
+		} else {
+			$data['rel_id'] = false;
+		}
 		return View::make('users.show', $data);
-		// $last_query = end($queries);
-		// dd($queries);
-		// Log::info(print_r($last_query, true));
-		
 	}
 
 	/**

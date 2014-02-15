@@ -1,26 +1,17 @@
 <div class="col-lg-3 hidden-sm hidden-xs hidden-md">
 <aside class="panel">
       <div class="text-center clearfix bg-white">
-        <img src="{{ URL::asset('assets/img/avatar.jpg')}}">
+        <img src="http://www.gravatar.com/avatar/c0f502ad15f19b2ccb8105fcb7b35e20?s=320">
       </div>
       <div class="bg-light padder padder-v">
-        <span class="h4">Mogen Adli</span>
-        <small class="block m-t-mini">Freelancer</small>
-        <button class="btn btn-primary btn-sm active" data-toggle="button">
-          <span class="text">
-            <i class="fa fa-eye-slash"></i> Follow
-          </span>
-          <span class="text-active">
-            <i class="fa fa-eye"></i> Following
-          </span>
-        </button>
+        <span class="h4">{{ Auth::user()->firstname .' '. Auth::user()->lastname}}</span>
       </div>
       <div class="list-group list-normal m-b-none">
         <a href="#" class="list-group-item">Profile</a>
-        <a href="#" class="list-group-item">Activity</a>
         <a href="#" class="list-group-item">Group</a>
-        <a href="#" class="list-group-item"><span class="badge m-r">3</span> Friends</a>
-        <a href="#" class="list-group-item"><span class="badge m-r">4</span> Posts</a>
+        <a href="#" class="list-group-item">Following</a>
+        <a href="#" class="list-group-item">Followers</a>
+        <a href="#" class="list-group-item">Posts</a>
       </div>
     </aside>
 </div>

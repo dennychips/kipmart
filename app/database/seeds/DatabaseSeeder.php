@@ -13,12 +13,12 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('UserSeeder');
 		$this->command->info('User Seeded');
-		$this->call('PostSeeder');
-		$this->command->info('Post table Seeded');
-		$this->call('FeedSeeder');
-		$this->command->info('Feed table Seeded');
-		$this->call('RelationshipSeeder');
-		$this->command->info('Relationship table Seeded');
+		// $this->call('PostSeeder');
+		// $this->command->info('Post table Seeded');
+		// $this->call('FeedSeeder');
+		// $this->command->info('Feed table Seeded');
+		// $this->call('RelationshipSeeder');
+		// $this->command->info('Relationship table Seeded');
 	}
 
 }
