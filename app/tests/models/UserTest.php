@@ -20,7 +20,7 @@ class UserTest extends TestCase {
 		$user->description = 'Lorem Ipsum';
 		$user->birthdate = '1983-01-06';
 		$user->password = 'password';
-		$user->password_confirmation = 'password';
+		
 		$user->admin = false;
 		//user should not save 
 		$this->assertFalse($user->save());

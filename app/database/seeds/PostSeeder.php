@@ -8,13 +8,13 @@ class PostSeeder extends Seeder {
 		$faker->addProvider(new Faker\Provider\Base($faker));
 		$faker->addProvider(new Faker\Provider\Image($faker));
 		$faker->addProvider(new Faker\Provider\Lorem($faker));
-
-		for($i=0;$i<100;$i++) {
+		$user = User::all();
+		for($i=0;$i<10000;$i++) {
 			
 			Post::create([
-					'user_id' => $faker->unique($reset = true)->randomNumber(1, 10),
+					'user_id' => rand(1, 1000),
 					'message' => $faker->sentence($nbWords = 10),
-					'picture' => 'image.png'
+					// 'picture' => 'image.png'
 				]);
 		}
 	}

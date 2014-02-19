@@ -53,6 +53,10 @@ class PostsController extends \BaseController {
 			$user = User::find(Auth::user()->id);
 			// $user->posts()->attach($post->id);
 			$user->posts()->save($post);
+
+			
+			// dd(DB::getQueryLog());
+			// $user->feeds()->save($post);
 			// dd(DB::getQueryLog());
 			return Redirect::to('/');
 		}

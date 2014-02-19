@@ -6,18 +6,19 @@ class Post extends Eloquent {
 	protected $fillable = ['message'];
 
 	public function user() {
-		return $this->belongsTo('Post');
+		return $this->belongsTo('User');
 	}
-	public function users() {
-		return $this->belongsToMany('User', 'users_has_posts', 'posts_id', 'users_id')->withTimestamps();
-	}
-	public function group() {
-		return $this->belongsTo('group');
-	}
-
-	public function comments() {
-		return $this->morphMany('Comment', 'commentable');
-	}
+	// public function users() {
+	// 	return $this->belongsToMany('User', 'users_has_posts', 'posts_id', 'users_id')->withTimestamps();
+	// }
+	
+	// public function feeder() {
+	// 	return $this->morphMany('Feed', 'feedable');
+	// }
+	
+	// public function comments() {
+	// 	return $this->morphMany('Comment', 'commentable');
+	// }
 	
 	// public function user(){
 	// 	return $this->belongsTo('User', 'sender_id');

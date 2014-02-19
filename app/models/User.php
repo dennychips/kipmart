@@ -29,7 +29,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'lastname' => 'string',
 		'email' => 'email',
 		'password' => 'password',
-		'password_confirmation' => 'password',
 		'admin' => false
 	);
 
@@ -80,14 +79,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	public function posts() {
 		// return $this->belongsToMany('Post', 'users_has_posts', 'users_id', 'posts_id')->withTimestamps();
-		return $this->hasMany('Post');
+		return $this->hasMany('Post'); /*->orderBy('posts.created_at', 'desc'); */
 		
+	}
+	public function relations() {
+		// return $this->hasMany('UserRelationship');
+	}
+
+	public function feeds() {
+		return $this->hasMany('Feed')->orderBy('created_at', 'desc');
 	}
 	public function follow() {
 		return $this->belongsToMany('User', 'user_relationships', 'user_id', 'followed_id')->withTimestamps();
 	}
 	public function followers() {
 		return $this->belongsToMany('User', 'user_relationships', 'followed_id', 'user_id')->withTimestamps();
+	}
+	public function following() {
+		return $this->hasMany('UserRelationship');
 	}
 	public function group() {
 		return $this->belongsToMany('Group');

@@ -51,25 +51,25 @@ class UserSeeder extends Seeder {
 		// $errors2 = $user2->errors();
 		// var_dump($errors);
 		// var_dump($errors2);
-		// $faker = Faker\Factory::create('en_US');
-		// $faker->addProvider(new Faker\Provider\en_US\Address($faker));
-		// $faker->addProvider(new Faker\Provider\DateTime($faker));
-		// $faker->addProvider(new Faker\Provider\Base($faker));
-		// $faker->addProvider(new Faker\Provider\en_US\Company($faker));
-		// $faker->addProvider(new Faker\Provider\Internet($faker));
-		// $faker->addProvider(new Faker\Provider\Lorem($faker));
+		$faker = Faker\Factory::create('en_US');
+		$faker->addProvider(new Faker\Provider\en_US\Address($faker));
+		$faker->addProvider(new Faker\Provider\DateTime($faker));
+		$faker->addProvider(new Faker\Provider\Base($faker));
+		$faker->addProvider(new Faker\Provider\en_US\Company($faker));
+		$faker->addProvider(new Faker\Provider\Internet($faker));
+		$faker->addProvider(new Faker\Provider\Lorem($faker));
 
-		// for($x=0;$x<10;$x++){
-		// 	User::create([
-		// 		'username' 	=> $faker->username,
-		// 		'firstname' => $faker->firstName,
-		// 		'lastname'	=> $faker->lastName,
-		// 		'email'		=> $faker->freeEmail,
-		// 		'password'	=> Hash::make('password'),
-		// 		'birthdate'	=> $faker->date($format = 'Y-m-d'),
-		// 		'description'	=> $faker->paragraph($nbSentences = 3),
-		// 		'admin'	=> false
-		// 	]);
-		// }
+		for($x=0;$x<1000;$x++){
+			User::create([
+				'username' 	=> $faker->username,
+				'firstname' => $faker->firstName,
+				'lastname'	=> $faker->lastName,
+				'email'		=> $faker->unique()->freeEmail,
+				'password'	=> Hash::make('password'),
+				'birthdate'	=> $faker->date($format = 'Y-m-d'),
+				'description'	=> $faker->paragraph($nbSentences = 3),
+				'admin'	=> false
+			]);
+		}
 	}
 }

@@ -44,6 +44,7 @@ class UserRelationshipController extends \BaseController {
 			$user = User::find(Auth::user()->id);
 			$followed_user = User::find(Input::get('user_id'));
 			$user->follow()->save($followed_user);
+			
 			$rel = UserRelationship::where('user_id', '=',$user->id)->where('followed_id', '=', $followed_user->id)->first();
 			
 			$data = ['id' => $rel->id];

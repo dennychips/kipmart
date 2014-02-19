@@ -19,6 +19,12 @@
     <li>
       <a href="#screenshot">Screenshot</a>
     </li>
+    <li>
+      <a href="{{URL::route('user.create')}}">Register</a>
+    </li>
+    <li>
+      <a href="{{URL::route('user.signin')}}">Sign In</a>
+    </li>
   </ul>
 </div>
 </header>
