@@ -34,12 +34,22 @@ class UserRelationshipController extends \BaseController {
 		{
 			// dd(Input::all());
 			
-			$current_user = Auth::user()->id;
-			$relations = new UserRelationship;
-			$relations->user_id = $current_user;
-			$relations->followed_id = Input::get('user_id');
-			$relations->save();
-			$data = ['id' => $relations->id];
+			// $current_user = Auth::user()->id;
+			// $relations = new UserRelationship;
+			// $relations->user_id = $current_user;
+			// $relations->followed_id = Input::get('user_id');
+			// $relations->save();
+			
+			// print_r(Input::all());
+			$user = User::find(Auth::user()->id);
+			$followed_user = User::find(Input::get('user_id'));
+			$user->follow()->save($followed_user);
+			
+			$rel = UserRelationship::where('user_id', '=',$user->id)->where('followed_id', '=', $followed_user->id)->first();
+			
+			$data = ['id' => $rel->id];
+
+
 			$unfollow = View::make('_partials.unfollow', $data)->render();
 			return Response::json(['html' => $unfollow]);
 		}
@@ -92,6 +102,8 @@ class UserRelationshipController extends \BaseController {
 		if (Request::ajax())
 		{
 		    $rel = UserRelationship::find($id);
+		    // print_r(DB::getQueryLog());
+		    // dd($rel->id . ' ' . $rel->followed_id);
 		    $rel->delete($id);
 			$data = array('user_id' => $rel->followed_id );
 		    $followform = View::make('_partials.follow', $data)->render();

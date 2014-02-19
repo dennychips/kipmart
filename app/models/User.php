@@ -2,18 +2,37 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use LaravelBook\Ardent\Ardent;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
-	
-		public static $rules = [
-		'firstname' 			=> 'required|alpha|min:2',
-		'lastname' 				=> 'required|alpha|min:2',
-		'username'	 			=> 'required|alpha_num|min:6',
-		'email' 				=> 'required|email|unique:users',
-		'password' 				=> 'required|alpha_num|between:6,12|confirmed',
-		'password_confirmation' => 'required|alpha_num|between:6,12',
 		
+	
+	public static $rules = [
+	// 'username' => 'required|between:4,16',
+	// 'email' => 'required|email',
+	// 'password' => 'required|alpha_num|min:8|confirmed',
+	// 'password_confirmation' => 'required|alpha_num|min:8',
+	'firstname' 			=> 'required|alpha|min:2',
+	'lastname' 				=> 'required|alpha|min:2',
+	'username'	 			=> 'required|alpha_num|between:4,18',
+	'email' 				=> 'required|email',
+	'password' 				=> 'required|alpha_num|between:6,12|confirmed',
+	'password_confirmation' => 'required|alpha_num|between:6,12',
+	
 	];
+	/**
+	 * Factory
+	 */
+	public static $factory = array(
+		'username' => 'string',
+		'firstname' => 'string',
+		'lastname' => 'string',
+		'email' => 'email',
+		'password' => 'password',
+		'admin' => false
+	);
+
+	public $autoPurgeRedundantAttributes = true;
 	/**
 	 * The database table used by the model.
 	 *
@@ -59,11 +78,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	public function posts() {
-		return $this->hasMany('Post');
+		// return $this->belongsToMany('Post', 'users_has_posts', 'users_id', 'posts_id')->withTimestamps();
+		return $this->hasMany('Post'); /*->orderBy('posts.created_at', 'desc'); */
+		
+	}
+	public function relations() {
+		// return $this->hasMany('UserRelationship');
+	}
+
+	public function feeds() {
+		return $this->hasMany('Feed')->orderBy('created_at', 'desc');
+	}
+	public function follow() {
+		return $this->belongsToMany('User', 'user_relationships', 'user_id', 'followed_id')->withTimestamps();
+	}
+	public function followers() {
+		return $this->belongsToMany('User', 'user_relationships', 'followed_id', 'user_id')->withTimestamps();
+	}
+	public function following() {
+		return $this->hasMany('UserRelationship');
+	}
+	public function group() {
+		return $this->belongsToMany('Group');
 	}
 	
-	public function feeds() {
-		return $this->hasMany('Feed', 'sender_id');
-	}
+	// public function feeds() {
+	// 	return $this->hasMany('Feed', 'sender_id');
+	// }
 
 }

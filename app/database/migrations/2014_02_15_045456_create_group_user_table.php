@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserRelationshipsTable extends Migration {
+class CreateGroupUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,11 @@ class CreateUserRelationshipsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('user_relationships', function(Blueprint $table)
+		Schema::create('group_user', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('group_id');
 			$table->integer('user_id');
-			$table->integer('followed_id');
-			// $table->primary(['id', 'users_id']);
-			// $table->foreign('users_id')->references('id')->on('users');
 			$table->timestamps();
 		});
 	}
@@ -30,7 +28,7 @@ class CreateUserRelationshipsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('user_relationships');
+		Schema::drop('group_user');
 	}
 
 }

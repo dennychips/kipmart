@@ -1,7 +1,7 @@
 <?php
 
 class PostsController extends \BaseController {
-
+	protected $guarded = array('id', 'password');
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -46,10 +46,18 @@ class PostsController extends \BaseController {
 		//
 		if($validator->passes()){
 			$post = new Post;
+			// $post->users_id = Auth::user()->id;
 			$post->message = Input::get('message');
-			$post->picture = URL('assets/uploads/img.png');
+			// $post->attachments = URL('assets/uploads/img.png');
+			// $post->save();
 			$user = User::find(Auth::user()->id);
+			// $user->posts()->attach($post->id);
 			$user->posts()->save($post);
+
+			
+			// dd(DB::getQueryLog());
+			// $user->feeds()->save($post);
+			// dd(DB::getQueryLog());
 			return Redirect::to('/');
 		}
 

@@ -1,5 +1,5 @@
 <!-- header -->
-  <header id="header" class="navbar bg bg-black">
+  <header id="header" class="navbar">
   
     <ul class="nav navbar-nav navbar-avatar pull-right">
       <li class="dropdown">
@@ -19,7 +19,7 @@
       </li>
     </ul>
 
-    <a class="navbar-brand" href="#">Market</a>
+    <a class="navbar-brand" href="#">Vavorage</a>
     <ul class="nav navbar-nav hidden-xs">
       <li>
       <div class="m-t-small"><a class="btn btn-sm btn-info" data-toggle="modal" href="#postModal"><i class="icon-plus"></i> POST</a></div>

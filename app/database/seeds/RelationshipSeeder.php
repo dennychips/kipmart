@@ -6,10 +6,11 @@ class RelationshipSeeder extends Seeder {
 		$faker = Faker\Factory::create('en_US');
 		$faker->addProvider(new Faker\Provider\Base($faker));
 
-		for($x=0;$x<100;$x++)
+
+		for($x=0;$x<1000;$x++)
 		UserRelationship::create([
-				'user_id' => $faker->unique($reset = true)->randomDigit(1, 10),
-				'followed_id' => $faker->unique($reset = true)->randomNumber(1, 10)
+				'user_id' => $faker->unique($reset = true)->randomDigit(1, 1000),
+				'followed_id' => $faker->unique($reset = true)->randomNumber(1, 1000)
 			]);
 	}
 }

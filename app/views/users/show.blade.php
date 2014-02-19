@@ -4,7 +4,7 @@
 <div class="col-lg-offset-4 col-lg-8">
 <aside class="panel">
       <div class="text-center clearfix bg-white">
-        <img src="{{ URL::asset('assets/img/avatar.jpg')}}">
+        <img src="http://www.gravatar.com/avatar/c0f502ad15f19b2ccb8105fcb7b35e20?s=320">
       </div>
       <div class="bg-light padder padder-v">
         <span class="h4">{{$user->firstname . ' ' . $user->lastname}}</span>
@@ -17,6 +17,7 @@
             <i class="fa fa-eye"></i> Following
           </span>
         </button> -->
+
         @if(Auth::user()->id != $user->id)
         <div class="relations-btn-{{ $user->id }}">
         	@if( $rel )
